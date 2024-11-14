@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'simple_barcode_scanner'
-  s.version          = '0.1.7'
+  s.version          = '0.1.8'
   s.summary          = 'simple_barcode_scanner that let you scan barcode and qr code in mobile, web and windows.'
   s.description      = <<-DESC
 simple_barcode_scanner that let you scan barcode and qr code in mobile, web and windows.

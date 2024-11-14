@@ -286,7 +286,7 @@ class BarcodeScannerViewController: UIViewController {
                 print("Failed to set up proper focus distance for the camera device")
                 return
             }
-            
+        }
         
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.

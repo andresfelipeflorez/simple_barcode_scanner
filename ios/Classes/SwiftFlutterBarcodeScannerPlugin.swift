@@ -266,11 +266,27 @@ class BarcodeScannerViewController: UIViewController {
     func initBarcodeComponents(){
         
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+        
         // Get the back-facing camera for capturing videos
         guard let captureDevice = deviceDiscoverySession.devices.first else {
             print("Failed to get the camera device")
             return
         }
+            
+        // Set the minimum focus distance threshold
+        let minimumFocusDistanceInMillimeters = 120
+        
+        if captureDevice.minimumFocusDistance > minimumFocusDistanceInMillimeters {
+            let percentIncrease: CGFloat = CGFloat(device.minimumFocusDistance - minimumFocusDistanceInMillimeters) / CGFloat(minimumFocusDistanceInMillimeters)
+            do {
+                try captureDevice.lockForConfiguration()
+                captureDevice.videoZoomFactor = 1.0 + percentIncrease
+                captureDevice.unlockForConfiguration()
+            } catch {
+                print("Failed to set up proper focus distance for the camera device")
+                return
+            }
+            
         
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
